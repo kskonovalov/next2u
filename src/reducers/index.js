@@ -1,9 +1,9 @@
 import { combineReducers } from 'redux';
 
-import todosReducer from './todosReducer';
+import apiReducer from './apiReducer';
 
 const rootReducer = combineReducers({
-  todos: todosReducer
+  apiData: apiReducer,
 });
 
 export default rootReducer;

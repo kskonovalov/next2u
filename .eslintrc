@@ -1,20 +1,11 @@
 {
-  "extends": [
-    "airbnb",
-    "prettier",
-    "prettier/react"
-  ],
-  "plugins": [
-    "prettier"
-  ],
+  "extends": ["airbnb", "prettier", "prettier/react"],
+  "plugins": ["prettier"],
   "rules": {
     "react/jsx-filename-extension": [
       1,
       {
-        "extensions": [
-          ".js",
-          ".jsx"
-        ]
+        "extensions": [".js", ".jsx"]
       }
     ],
     "import/no-extraneous-dependencies": [
@@ -25,11 +16,24 @@
     ],
     "react/prop-types": 0,
     "no-underscore-dangle": 0,
-    "import/imports-first": [
+    "import/imports-first": ["error", "absolute-first"],
+    "import/newline-after-import": "error",
+    "jsx-a11y/label-has-associated-control": [
       "error",
-      "absolute-first"
+      {
+        "required": {
+          "some": ["nesting", "id"]
+        }
+      }
     ],
-    "import/newline-after-import": "error"
+    "jsx-a11y/label-has-for": [
+      "error",
+      {
+        "required": {
+          "some": ["nesting", "id"]
+        }
+      }
+    ]
   },
   "globals": {
     "window": true,

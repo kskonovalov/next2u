@@ -1,35 +1,40 @@
-import React from 'react';
+import React  from 'react';
 import { Provider } from 'react-redux';
+import { BrowserRouter, Route, Link } from 'react-router-dom';
 
 import store from '../store';
-import TodosList from './TodosList';
+import Tasks from './Tasks';
+import Profile from './Profile';
 
 const App = () => {
-  store.dispatch({ type: "API_CALL_REQUEST" })
+  const { user = {} } = typeof window.__DATA__ !== 'undefined' && window.__DATA__;
+  const { name = '' } = user;
   return (
     <Provider store={store}>
-      <nav className="navbar navbar-expand-lg navbar-light bg-light">
-        <div className="collapse navbar-collapse">
-          <ul className="navbar-nav mr-auto">
-            <li className="nav-item active">
-              <a className="nav-link" href="tasks.html">
-                Все задачи
-              </a>
-            </li>
-            <li className="nav-item">
-              <a className="nav-link" href="profile.html">
-                Мои задачи
-              </a>
-            </li>
-          </ul>
-          <span className="navbar-text">user.name</span>
+      <BrowserRouter>
+        <nav className="navbar navbar-expand-lg navbar-light bg-light">
+          <div className="collapse navbar-collapse">
+            <ul className="navbar-nav mr-auto">
+              <li className="nav-item active">
+                <Link to="tasks.html" className="nav-link">
+                  Все задачи
+                </Link>
+              </li>
+              <li className="nav-item">
+                <Link to="profile.html" className="nav-link">
+                  Мои задачи
+                </Link>
+              </li>
+            </ul>
+            <span className="navbar-text">{name}</span>
+          </div>
+        </nav>
+        <div className="container">
+          <Route path="/" exact component={Tasks} />
+          <Route path="/tasks.html" component={Tasks} />
+          <Route path="/profile.html" component={Profile} />
         </div>
-      </nav>
-
-      <div className="container">
-        <h2>Все задачи</h2>
-        <TodosList />
-      </div>
+      </BrowserRouter>
     </Provider>
   );
 };

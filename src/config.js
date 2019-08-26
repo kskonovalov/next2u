@@ -1,6 +1,10 @@
-const tasksApiUrl = 'https://jsonplaceholder.typicode.com/todos';
+const todosApiUrl = 'https://jsonplaceholder.typicode.com/todos';
 
-export { tasksApiUrl };
+export { todosApiUrl };
+
+const usersApiUrl = 'https://jsonplaceholder.typicode.com/users';
+
+export { usersApiUrl };
 
 const userTasksApiUrl =
   'https://jsonplaceholder.typicode.com/todos?userId=%user_id%';
@@ -13,10 +17,17 @@ const userInfoApiUrl =
 export { userInfoApiUrl };
 
 const initialState = {
-  todos: {
-    fetching: false,
-    todos: null,
-    error: null
+  apiData: {
+    todos: {
+      fetching: false,
+      data: null,
+      error: null
+    },
+    users: {
+      fetching: false,
+      data: null,
+      error: null
+    }
   }
 };
 
