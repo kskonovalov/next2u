@@ -6,15 +6,12 @@ const usersApiUrl = 'https://jsonplaceholder.typicode.com/users';
 
 export { usersApiUrl };
 
-const userTasksApiUrl =
-  'https://jsonplaceholder.typicode.com/todos?userId=%user_id%';
+const apiUrls = {
+  'todos': todosApiUrl,
+  'users': usersApiUrl
+};
 
-export { userTasksApiUrl };
-
-const userInfoApiUrl =
-  'https://jsonplaceholder.typicode.com/users?id=%user_id%';
-
-export { userInfoApiUrl };
+export { apiUrls };
 
 const initialState = {
   apiData: {
@@ -28,7 +25,12 @@ const initialState = {
       data: null,
       error: null
     }
-  }
+  },
+  user:
+    typeof window.__DATA__ !== 'undefined' &&
+    typeof window.__DATA__.user !== 'undefined'
+      ? window.__DATA__.user
+      : {}
 };
 
 export { initialState };

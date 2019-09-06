@@ -5,7 +5,8 @@
  */
 const getIdToUserObject = users => {
   const usersObject = {};
-  if (typeof users === 'object' && users !== null) {
+  // if (typeof users === 'Array' && users !== null) {
+  if (Array.isArray( users) && users !== null) {
     users.forEach(item => {
       if (typeof item.id !== 'undefined') {
         usersObject[item.id] = item;

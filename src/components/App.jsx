@@ -1,16 +1,13 @@
-import React  from 'react';
-import { Provider } from 'react-redux';
+import React from 'react';
+import { connect } from 'react-redux';
 import { BrowserRouter, Route, Link } from 'react-router-dom';
 
-import store from '../store';
 import Tasks from './Tasks';
 import Profile from './Profile';
 
-const App = () => {
-  const { user = {} } = typeof window.__DATA__ !== 'undefined' && window.__DATA__;
-  const { name = '' } = user;
+const App = ({ user }) => {
+  const { name } = user;
   return (
-    <Provider store={store}>
       <BrowserRouter>
         <nav className="navbar navbar-expand-lg navbar-light bg-light">
           <div className="collapse navbar-collapse">
@@ -35,8 +32,14 @@ const App = () => {
           <Route path="/profile.html" component={Profile} />
         </div>
       </BrowserRouter>
-    </Provider>
   );
 };
 
-export default App;
+const mapStateToProps = appStore => {
+  const { user } = appStore;
+  return {
+    user
+  };
+};
+
+export default connect(mapStateToProps)(App);

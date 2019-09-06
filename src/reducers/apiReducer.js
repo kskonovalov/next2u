@@ -7,9 +7,6 @@ import {
 
 
 const apiReducer = (state = initialState.apiData, action) => {
-  if (typeof action === 'undefined' || typeof action.apiType === 'undefined') {
-    // return state;
-  }
   switch (action.type) {
     case API_CALL_REQUEST:
       return {

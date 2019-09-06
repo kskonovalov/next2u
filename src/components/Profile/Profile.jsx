@@ -1,51 +1,57 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { connect } from 'react-redux';
 
 import UserData from './UserData';
 import UserEdit from './UserEdit';
+import Tasks from '../Tasks';
+import { todoApiCallRequest, userDataUpdate } from '../../actions';
 
-const Profile = () => {
-  const { user = {} } =
-    typeof window.__DATA__ !== 'undefined' && window.__DATA__;
-
-  const [userData, updateUserData] = useState(user);
+const Profile = ({ user, updateState, getTodos, todosResult }) => {
   const [editMode, setEditMode] = useState(false);
-  
-  const updateGlobalUserData = userDataNew => {
-    updateUserData(userDataNew);
-    window.__DATA__.user = userDataNew;
+  useEffect(() => {
+    getTodos(user.id);
+  }, [user.id]);
+
+  const updateGlobalUserData = userData => {
     setEditMode(false);
+    updateState(userData);
   };
 
-  const { name = '' } = userData;
+  const { name = '' } = user;
   return (
     <>
       <h2>Задачи {name}</h2>
       <div className="row">
         <div className="col-md-4">
-          {!editMode && (
-            <UserData user={user} setEditMode={setEditMode} />
-          )}
-          {editMode && (
+          {editMode ? (
             <UserEdit user={user} updateGlobalUserData={updateGlobalUserData} />
+          ) : (
+            <UserData user={user} setEditMode={setEditMode} />
           )}
         </div>
         <div className="col-md-8">
-          <ul className="list-group">
-            <li className="list-group-item d-flex justify-content-between align-items-center">
-              <h5 className="mb-1">todos.title </h5>
-              <small>user.name</small>
-            </li>
-            <li className="list-group-item d-flex justify-content-between align-items-center">
-              <h5 className="mb-1">
-                <s>todos.title</s>
-              </h5>
-              <small>user.name</small>
-            </li>
-          </ul>
+          <Tasks todosData={todosResult} usersData={{ user }} />
         </div>
       </div>
     </>
   );
 };
 
-export default Profile;
+const mapStateToProps = appStore => {
+  const { user } = appStore;
+  const { todos } = appStore.apiData;
+  return {
+    user,
+    todosResult: todos
+  };
+};
+
+const mapDispatchToProps = dispatch => ({
+  updateState: userData => dispatch(userDataUpdate(userData)),
+  getTodos: userId => dispatch(todoApiCallRequest(userId))
+});
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Profile);

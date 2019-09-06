@@ -1,15 +1,19 @@
 import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 
-import TodoItem from './TodoItem';
-import { getIdToUserObject } from '../../helpers';
-import store from '../../store';
+import { todoApiCallRequest, usersApiCallRequest } from '../../actions';
+import TodoList from './TodoList';
 
-const Tasks = ({ todosResult, usersResult }) => {
+const Tasks = ({
+  todosResult,
+  usersResult,
+  getTodos,
+  getUsers
+}) => {
   useEffect(() => {
-    store.dispatch({ type: 'API_CALL_REQUEST', apiType: 'todos' });
-    store.dispatch({ type: 'API_CALL_REQUEST', apiType: 'users' });
-  }, []);
+    getTodos(false);
+    getUsers();
+  }, [getTodos, getUsers]);
   const {
     data: todosData,
     fetching: todosFetching,
@@ -30,25 +34,10 @@ const Tasks = ({ todosResult, usersResult }) => {
       </div>
     );
   }
-  const usersObject = getIdToUserObject(usersData);
   return (
     <>
       <h2>Все задачи</h2>
-      <ul className="list-group">
-        {typeof todosData === 'object' &&
-          todosData !== null &&
-          Object.keys(todosData).map(key => (
-            <TodoItem
-              key={todosData[key].id}
-              item={todosData[key]}
-              user={
-                typeof usersObject[todosData[key].userId] !== 'undefined'
-                  ? usersObject[todosData[key].userId]
-                  : {}
-              }
-            />
-          ))}
-      </ul>
+      <TodoList usersData={usersData} todosData={todosData} />
     </>
   );
 };
@@ -57,8 +46,17 @@ const mapStateToProps = appStore => {
   const { todos, users } = appStore.apiData;
   return {
     todosResult: todos,
-    usersResult: users
+    usersResult: users,
+    user: appStore.user
   };
 };
 
-export default connect(mapStateToProps)(Tasks);
+const mapDispatchToProps = dispatch => ({
+  getTodos: userId => dispatch(todoApiCallRequest(userId)),
+  getUsers: () => dispatch(usersApiCallRequest())
+});
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Tasks);
