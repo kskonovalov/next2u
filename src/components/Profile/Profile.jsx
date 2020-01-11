@@ -3,14 +3,16 @@ import { connect } from 'react-redux';
 
 import UserData from './UserData';
 import UserEdit from './UserEdit';
-import Tasks from '../Tasks';
+import TodoList from '../Tasks/TodoList';
+import Loader from '../helpers/Loader';
 import { todoApiCallRequest, userDataUpdate } from '../../actions';
+import { getIdToUserObject } from '../../helpers';
 
 const Profile = ({ user, updateState, getTodos, todosResult }) => {
   const [editMode, setEditMode] = useState(false);
   useEffect(() => {
     getTodos(user.id);
-  }, [user.id]);
+  }, [user.id, getTodos]);
 
   const updateGlobalUserData = userData => {
     setEditMode(false);
@@ -18,6 +20,22 @@ const Profile = ({ user, updateState, getTodos, todosResult }) => {
   };
 
   const { name = '' } = user;
+
+  const {
+    data: todosData,
+    fetching: todosFetching,
+    error: todosError
+  } = todosResult;
+
+  if (todosFetching) {
+    return <Loader />;
+  }
+
+  if (todosError) {
+    return <div className="alert alert-warning">Что-то пошло не так..</div>;
+  }
+
+  const idToUserObject = getIdToUserObject([user]);
   return (
     <>
       <h2>Задачи {name}</h2>
@@ -30,7 +48,7 @@ const Profile = ({ user, updateState, getTodos, todosResult }) => {
           )}
         </div>
         <div className="col-md-8">
-          <Tasks todosData={todosResult} usersData={{ user }} />
+          <TodoList usersData={idToUserObject} todosData={todosData} />
         </div>
       </div>
     </>

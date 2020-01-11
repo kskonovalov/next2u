@@ -3,6 +3,8 @@ import { connect } from 'react-redux';
 
 import { todoApiCallRequest, usersApiCallRequest } from '../../actions';
 import TodoList from './TodoList';
+import Loader from '../helpers/Loader';
+import { getIdToUserObject } from '../../helpers';
 
 const Tasks = ({
   todosResult,
@@ -25,7 +27,7 @@ const Tasks = ({
     error: usersError
   } = usersResult;
   if (todosFetching || usersFetching) {
-    return <div className="alert alert-info">Загрузка..</div>;
+    return <Loader />;
   }
   if (todosError || usersError) {
     return (
@@ -34,10 +36,11 @@ const Tasks = ({
       </div>
     );
   }
+  const idToUserObject = getIdToUserObject(usersData);
   return (
     <>
       <h2>Все задачи</h2>
-      <TodoList usersData={usersData} todosData={todosData} />
+      <TodoList usersData={idToUserObject} todosData={todosData} />
     </>
   );
 };
