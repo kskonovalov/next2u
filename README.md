@@ -5,64 +5,31 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 In the project directory, you can run:
 
 ### `npm start`
-
-Runs the app in the development mode.<br>
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
-
-The page will reload if you make edits.<br>
-You will also see any lint errors in the console.
-
 ### `npm test`
-
-Launches the test runner in the interactive watch mode.<br>
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
 ### `npm run build`
 
-Builds the app for production to the `build` folder.<br>
-It correctly bundles React in production mode and optimizes the build for the best performance.
+Есть две страницы. На одной странице выводится список всех задач, на второй информация о пользователе, форма редактирования пользователя и его задачи. 
 
-The build is minified and the filenames include the hashes.<br>
-Your app is ready to be deployed!
+В качестве API используется:
+1. Список всех задач: https://jsonplaceholder.typicode.com/todos
+2. Список задач пользователя: https://jsonplaceholder.typicode.com/todos?userId=1
+3. Информация о пользователе: https://jsonplaceholder.typicode.com/users?id=1
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+Вся информация о текущем пользователе, для минимазации запросов к API, загружается в window.__DATA__
 
-### `npm run eject`
+Что требуется реализовать на странице tasks.html:
+1. Отображение информации о пользователе +
+2. Загрузку списка задач и информацию о пользователях +
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+Что требуется реализовать на странице profile.html:
+1. Отображение информации о пользователе +
+2. Загрузку списка задач пользователя +
+3. Редактирование информации о пользователе с обновлением данных во всех компонентах на странице +
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+Требования:
+1. На каждую страницу должен создаваться отдельный бандл ()
+2. В первую очередь должны быть отрендерены компоненты для которых уже есть данные
+3. Предусмотреть возможность того, что в window.__DATA__ наборы данных могут измениться, 
+к примеру на странице profile.html может появиться todos с заранее загруженными данными о задачах пользователя
 
-Instead, it will copy all the configuration files and the transitive dependencies (Webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
-
-### Analyzing the Bundle Size
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
-
-### Making a Progressive Web App
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `npm run build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+Использовать react, redux-saga
