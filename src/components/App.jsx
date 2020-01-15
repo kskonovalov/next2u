@@ -1,11 +1,17 @@
-import React, { Suspense, lazy } from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
 import { BrowserRouter, Route, NavLink } from 'react-router-dom';
+import loadable from '@loadable/component'
+
 
 import Loader from './Loader';
 
-const Tasks = lazy(() => import('../pages/Tasks'));
-const Profile = lazy(() => import('../pages/Profile'));
+const Tasks = loadable(() => import('../pages/Tasks'), {
+  fallback: <Loader />
+});
+const Profile = loadable(() => import('../pages/Profile'), {
+  fallback: <Loader />
+});
 
 const App = ({ user }) => {
   const { name } = user;
@@ -37,11 +43,9 @@ const App = ({ user }) => {
         </nav>
       </nav>
       <div className="container">
-        <Suspense fallback={<Loader />}>
-          <Route path="/" exact component={Tasks} />
-          <Route path="/tasks.html" component={Tasks} />
-          <Route path="/profile.html" component={Profile} />
-        </Suspense>
+        <Route path="/" exact component={Tasks} />
+        <Route path="/tasks.html" component={Tasks} />
+        <Route path="/profile.html" component={Profile} />
       </div>
     </BrowserRouter>
   );
