@@ -1,11 +1,12 @@
 import { combineReducers } from 'redux';
 
-import apiReducer from './apiReducer';
+import usersReducer from './usersReducer';
+import tasksReducer from './tasksReducer';
 import userReducer from './userReducer';
 
 const rootReducer = combineReducers({
-  users: apiReducer,
-  tasks: apiReducer,
+  users: usersReducer,
+  tasks: tasksReducer,
   user: userReducer
 });
 

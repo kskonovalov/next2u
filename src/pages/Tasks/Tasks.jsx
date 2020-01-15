@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 
-import { todoApiCallRequest, usersApiCallRequest } from '../../store/actions';
+import { tasksApiCallRequest, usersApiCallRequest } from '../../store/actions';
 import { getIdToUserObject } from '../../helpers';
 import TodoList from './TodoList';
 import Loader from '../../components/Loader';
@@ -55,7 +55,7 @@ const mapStateToProps = appStore => {
 };
 
 const mapDispatchToProps = dispatch => ({
-  getTasks: userId => dispatch(todoApiCallRequest(userId)),
+  getTasks: userId => dispatch(tasksApiCallRequest(userId)),
   getUsers: () => dispatch(usersApiCallRequest())
 });
 

@@ -3,7 +3,24 @@ import createSagaMiddleware from 'redux-saga';
 
 import rootReducer from './reducers';
 import apiWatcherSaga from './sagas/apiSaga';
-import { initialState } from '../config';
+
+const initialState = {
+  tasks: {
+    fetching: false,
+    data: null,
+    error: null
+  },
+  users: {
+    fetching: false,
+    data: null,
+    error: null
+  },
+  user:
+    typeof window.__DATA__ !== 'undefined' &&
+    typeof window.__DATA__.user !== 'undefined'
+      ? window.__DATA__.user
+      : {}
+};
 
 // create saga middleware
 const sagaMiddleware = createSagaMiddleware();

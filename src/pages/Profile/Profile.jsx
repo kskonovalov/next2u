@@ -5,7 +5,7 @@ import UserData from './UserData';
 import UserEdit from './UserEdit';
 import TodoList from '../Tasks/TodoList';
 import Loader from '../../components/Loader';
-import { todoApiCallRequest, userDataUpdate } from '../../store/actions';
+import { tasksApiCallRequest, userDataUpdate } from '../../store/actions';
 import { getIdToUserObject } from '../../helpers';
 
 const Profile = ({ user, updateState, getTasks, tasksResult }) => {
@@ -65,7 +65,7 @@ const mapStateToProps = appStore => {
 
 const mapDispatchToProps = dispatch => ({
   updateState: userData => dispatch(userDataUpdate(userData)),
-  getTasks: userId => dispatch(todoApiCallRequest(userId))
+  getTasks: userId => dispatch(tasksApiCallRequest(userId))
 });
 
 export default connect(
