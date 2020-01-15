@@ -43,7 +43,7 @@ function* apiWorkerSaga(action) {
     } catch (error) {
       switch (apiType) {
         case 'tasks':
-          yield put({ type: USERS_API_CALL_FAILURE, apiType, [apiType]: { error } });
+          yield put({ type: TASKS_API_CALL_FAILURE, apiType, [apiType]: { error } });
           break;
         case 'users':
           yield put({ type: USERS_API_CALL_FAILURE, apiType, [apiType]: { error } });
