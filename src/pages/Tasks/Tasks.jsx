@@ -7,29 +7,29 @@ import TodoList from './TodoList';
 import Loader from '../../components/Loader';
 
 const Tasks = ({
-  todosResult,
+  tasksResult,
   usersResult,
-  getTodos,
+  getTasks,
   getUsers
 }) => {
   useEffect(() => {
-    getTodos(false);
+    getTasks(false);
     getUsers();
-  }, [getTodos, getUsers]);
+  }, [getTasks, getUsers]);
   const {
-    data: todosData,
-    fetching: todosFetching,
-    error: todosError
-  } = todosResult;
+    data: tasksData,
+    fetching: tasksFetching,
+    error: tasksError
+  } = tasksResult;
   const {
     data: usersData,
     fetching: usersFetching,
     error: usersError
   } = usersResult;
-  if (todosFetching || usersFetching) {
+  if (tasksFetching || usersFetching) {
     return <Loader />;
   }
-  if (todosError || usersError) {
+  if (tasksError || usersError) {
     return (
       <div className="alert alert-info">
         Что-то пошло не так. Обновите страницу, или попробуйте вернуться позже!
@@ -40,22 +40,22 @@ const Tasks = ({
   return (
     <>
       <h2>Все задачи</h2>
-      <TodoList usersData={idToUserObject} todosData={todosData} />
+      <TodoList usersData={idToUserObject} tasksData={tasksData} />
     </>
   );
 };
 
 const mapStateToProps = appStore => {
-  const { todos, users } = appStore.apiData;
+  const { tasks, users } = appStore;
   return {
-    todosResult: todos,
+    tasksResult: tasks,
     usersResult: users,
     user: appStore.user
   };
 };
 
 const mapDispatchToProps = dispatch => ({
-  getTodos: userId => dispatch(todoApiCallRequest(userId)),
+  getTasks: userId => dispatch(todoApiCallRequest(userId)),
   getUsers: () => dispatch(usersApiCallRequest())
 });
 

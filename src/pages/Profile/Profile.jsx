@@ -8,11 +8,11 @@ import Loader from '../../components/Loader';
 import { todoApiCallRequest, userDataUpdate } from '../../store/actions';
 import { getIdToUserObject } from '../../helpers';
 
-const Profile = ({ user, updateState, getTodos, todosResult }) => {
+const Profile = ({ user, updateState, getTasks, tasksResult }) => {
   const [editMode, setEditMode] = useState(false);
   useEffect(() => {
-    getTodos(user.id);
-  }, [user.id, getTodos]);
+    getTasks(user.id);
+  }, [user.id, getTasks]);
 
   const updateGlobalUserData = userData => {
     setEditMode(false);
@@ -22,16 +22,16 @@ const Profile = ({ user, updateState, getTodos, todosResult }) => {
   const { name = '' } = user;
 
   const {
-    data: todosData,
-    fetching: todosFetching,
-    error: todosError
-  } = todosResult;
+    data: tasksData,
+    fetching: tasksFetching,
+    error: tasksError
+  } = tasksResult;
 
-  if (todosFetching) {
+  if (tasksFetching) {
     return <Loader />;
   }
 
-  if (todosError) {
+  if (tasksError) {
     return <div className="alert alert-warning">Что-то пошло не так..</div>;
   }
 
@@ -48,7 +48,7 @@ const Profile = ({ user, updateState, getTodos, todosResult }) => {
           )}
         </div>
         <div className="col-md-8">
-          <TodoList usersData={idToUserObject} todosData={todosData} />
+          <TodoList usersData={idToUserObject} tasksData={tasksData} />
         </div>
       </div>
     </>
@@ -56,17 +56,16 @@ const Profile = ({ user, updateState, getTodos, todosResult }) => {
 };
 
 const mapStateToProps = appStore => {
-  const { user } = appStore;
-  const { todos } = appStore.apiData;
+  const { tasks, user } = appStore;
   return {
     user,
-    todosResult: todos
+    tasksResult: tasks
   };
 };
 
 const mapDispatchToProps = dispatch => ({
   updateState: userData => dispatch(userDataUpdate(userData)),
-  getTodos: userId => dispatch(todoApiCallRequest(userId))
+  getTasks: userId => dispatch(todoApiCallRequest(userId))
 });
 
 export default connect(

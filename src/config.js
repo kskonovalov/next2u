@@ -1,30 +1,28 @@
-const todosApiUrl = 'https://jsonplaceholder.typicode.com/todos';
+const tasksApiUrl = 'https://jsonplaceholder.typicode.com/todos';
 
-export { todosApiUrl };
+export { tasksApiUrl };
 
 const usersApiUrl = 'https://jsonplaceholder.typicode.com/users';
 
 export { usersApiUrl };
 
 const apiUrls = {
-  'todos': todosApiUrl,
-  'users': usersApiUrl
+  tasks: tasksApiUrl,
+  users: usersApiUrl
 };
 
 export { apiUrls };
 
 const initialState = {
-  apiData: {
-    todos: {
-      fetching: false,
-      data: null,
-      error: null
-    },
-    users: {
-      fetching: false,
-      data: null,
-      error: null
-    }
+  tasks: {
+    fetching: false,
+    data: null,
+    error: null
+  },
+  users: {
+    fetching: false,
+    data: null,
+    error: null
   },
   user:
     typeof window.__DATA__ !== 'undefined' &&

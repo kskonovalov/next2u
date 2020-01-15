@@ -7,7 +7,7 @@ export const userDataUpdate = user => ({
 
 export const todoApiCallRequest = (userId = false) => ({
   type: API_CALL_REQUEST,
-  apiType: 'todos',
+  apiType: 'tasks',
   userId
 });
 

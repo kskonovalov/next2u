@@ -4,7 +4,8 @@ import apiReducer from './apiReducer';
 import userReducer from './userReducer';
 
 const rootReducer = combineReducers({
-  apiData: apiReducer,
+  users: apiReducer,
+  tasks: apiReducer,
   user: userReducer
 });
 
