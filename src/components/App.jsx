@@ -1,8 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { BrowserRouter, Route, NavLink } from 'react-router-dom';
-import loadable from '@loadable/component'
-
+import loadable from '@loadable/component';
 
 import Loader from './Loader';
 
@@ -12,6 +11,10 @@ const Tasks = loadable(() => import('../pages/Tasks'), {
 const Profile = loadable(() => import('../pages/Profile'), {
   fallback: <Loader />
 });
+
+const updateWinData = () => {
+  console.log(window.__DATA__);
+};
 
 const App = ({ user }) => {
   const { name } = user;
@@ -37,6 +40,11 @@ const App = ({ user }) => {
               >
                 Мои задачи
               </NavLink>
+            </li>
+            <li className="nav-item">
+              <button type="button" onClick={updateWinData}>
+                Test update of window._DATA_
+              </button>
             </li>
           </ul>
           <span className="navbar-text">{name}</span>
