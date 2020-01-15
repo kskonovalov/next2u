@@ -1,11 +1,11 @@
-import React, { Suspense } from 'react';
+import React, { Suspense, lazy } from 'react';
 import { connect } from 'react-redux';
 import { BrowserRouter, Route, NavLink } from 'react-router-dom';
 
-import Loader from './helpers/Loader';
+import Loader from './Loader';
 
-const Tasks = React.lazy(() => import('./Tasks'));
-const Profile = React.lazy(() => import('./Profile'));
+const Tasks = lazy(() => import('../pages/Tasks'));
+const Profile = lazy(() => import('../pages/Profile'));
 
 const App = ({ user }) => {
   const { name } = user;

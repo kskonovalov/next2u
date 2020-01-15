@@ -4,8 +4,8 @@ import { connect } from 'react-redux';
 import UserData from './UserData';
 import UserEdit from './UserEdit';
 import TodoList from '../Tasks/TodoList';
-import Loader from '../helpers/Loader';
-import { todoApiCallRequest, userDataUpdate } from '../../actions';
+import Loader from '../../components/Loader';
+import { todoApiCallRequest, userDataUpdate } from '../../store/actions';
 import { getIdToUserObject } from '../../helpers';
 
 const Profile = ({ user, updateState, getTodos, todosResult }) => {

@@ -1,10 +1,10 @@
 import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 
-import { todoApiCallRequest, usersApiCallRequest } from '../../actions';
-import TodoList from './TodoList';
-import Loader from '../helpers/Loader';
+import { todoApiCallRequest, usersApiCallRequest } from '../../store/actions';
 import { getIdToUserObject } from '../../helpers';
+import TodoList from './TodoList';
+import Loader from '../../components/Loader';
 
 const Tasks = ({
   todosResult,

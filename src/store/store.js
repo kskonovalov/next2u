@@ -3,7 +3,7 @@ import createSagaMiddleware from 'redux-saga';
 
 import rootReducer from './reducers';
 import apiWatcherSaga from './sagas/apiSaga';
-import { initialState } from './config';
+import { initialState } from '../config';
 
 // create saga middleware
 const sagaMiddleware = createSagaMiddleware();

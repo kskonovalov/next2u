@@ -1,8 +1,8 @@
 import { takeEvery, call, put } from 'redux-saga/effects';
 
-import fetchDataFromApi from '../services/api';
-import { apiUrls } from '../config';
-import { updateQueryStringParameter } from '../helpers';
+import fetchDataFromApi from '../../services/api';
+import { apiUrls } from '../../config';
+import { updateQueryStringParameter } from '../../helpers';
 
 import {
   API_CALL_REQUEST,

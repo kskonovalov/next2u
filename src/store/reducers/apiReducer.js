@@ -1,4 +1,4 @@
-import { initialState } from '../config';
+import { initialState } from '../../config';
 import {
   API_CALL_REQUEST,
   API_CALL_SUCCESS,
