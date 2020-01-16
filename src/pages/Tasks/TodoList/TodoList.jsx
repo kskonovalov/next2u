@@ -1,7 +1,13 @@
 import React from 'react';
-import TodoItem from '../TodoItem';
 
-const TodoList = ({ tasksData, usersData }) => {
+import TodoItem from '../TodoItem';
+import Loader from '../../../components/Loader';
+
+const TodoList = ({ tasksData, usersData, loading = false }) => {
+
+  if (loading) {
+    return <Loader />;
+  }
 
   if (typeof tasksData === 'undefined' || tasksData == null) {
     return <div>не найдено..</div>;

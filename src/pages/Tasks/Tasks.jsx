@@ -4,31 +4,25 @@ import { connect } from 'react-redux';
 import { tasksApiCallRequest, usersApiCallRequest } from '../../store/actions';
 import { getIdToUserObject } from '../../helpers';
 import TodoList from './TodoList';
-import Loader from '../../components/Loader';
 
-const Tasks = ({
-  tasksResult,
-  usersResult,
-  getTasks,
-  getUsers
-}) => {
+const Tasks = ({ tasksResult, usersResult, getTasks, getUsers }) => {
   useEffect(() => {
     getTasks(false);
     getUsers();
   }, [getTasks, getUsers]);
+
   const {
     data: tasksData,
     fetching: tasksFetching,
     error: tasksError
   } = tasksResult;
+
   const {
     data: usersData,
     fetching: usersFetching,
     error: usersError
   } = usersResult;
-  if (tasksFetching || usersFetching) {
-    return <Loader />;
-  }
+
   if (tasksError || usersError) {
     return (
       <div className="alert alert-info">
@@ -36,11 +30,16 @@ const Tasks = ({
       </div>
     );
   }
+
   const idToUserObject = getIdToUserObject(usersData);
   return (
     <>
       <h2>Все задачи</h2>
-      <TodoList usersData={idToUserObject} tasksData={tasksData} />
+      <TodoList
+        usersData={idToUserObject}
+        tasksData={tasksData}
+        loading={tasksFetching || usersFetching}
+      />
     </>
   );
 };
@@ -59,7 +58,4 @@ const mapDispatchToProps = dispatch => ({
   getUsers: () => dispatch(usersApiCallRequest())
 });
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(Tasks);
+export default connect(mapStateToProps, mapDispatchToProps)(Tasks);

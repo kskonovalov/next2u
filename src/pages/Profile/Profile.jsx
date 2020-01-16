@@ -27,14 +27,6 @@ const Profile = ({ user, updateState, getTasks, tasksResult }) => {
     error: tasksError
   } = tasksResult;
 
-  if (tasksFetching) {
-    return <Loader />;
-  }
-
-  if (tasksError) {
-    return <div className="alert alert-warning">Что-то пошло не так..</div>;
-  }
-
   const idToUserObject = getIdToUserObject([user]);
   return (
     <>
@@ -48,7 +40,7 @@ const Profile = ({ user, updateState, getTasks, tasksResult }) => {
           )}
         </div>
         <div className="col-md-8">
-          <TodoList usersData={idToUserObject} tasksData={tasksData} />
+          <TodoList usersData={idToUserObject} loading={tasksFetching} tasksData={tasksData} />
         </div>
       </div>
     </>
