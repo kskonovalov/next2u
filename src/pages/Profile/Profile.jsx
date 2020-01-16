@@ -4,7 +4,6 @@ import { connect } from 'react-redux';
 import UserData from './UserData';
 import UserEdit from './UserEdit';
 import TodoList from '../Tasks/TodoList';
-import Loader from '../../components/Loader';
 import { tasksApiCallRequest, userDataUpdate } from '../../store/actions';
 import { getIdToUserObject } from '../../helpers';
 
@@ -28,6 +27,7 @@ const Profile = ({ user, updateState, getTasks, tasksResult }) => {
   } = tasksResult;
 
   const idToUserObject = getIdToUserObject([user]);
+  
   return (
     <>
       <h2>Задачи {name}</h2>
@@ -40,7 +40,12 @@ const Profile = ({ user, updateState, getTasks, tasksResult }) => {
           )}
         </div>
         <div className="col-md-8">
-          <TodoList usersData={idToUserObject} loading={tasksFetching} tasksData={tasksData} />
+          <TodoList
+            usersData={idToUserObject}
+            loading={tasksFetching}
+            error={tasksError}
+            tasksData={tasksData}
+          />
         </div>
       </div>
     </>
@@ -60,7 +65,4 @@ const mapDispatchToProps = dispatch => ({
   getTasks: userId => dispatch(tasksApiCallRequest(userId))
 });
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(Profile);
+export default connect(mapStateToProps, mapDispatchToProps)(Profile);

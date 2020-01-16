@@ -14,6 +14,11 @@ const Profile = loadable(() => import('../pages/Profile'), {
 
 const updateWinData = () => {
   console.log(window.__DATA__);
+  window.__DATA__ = {
+    ...window.__DATA__,
+
+  };
+  console.log();
 };
 
 const App = ({ user }) => {

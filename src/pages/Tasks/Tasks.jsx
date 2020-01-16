@@ -23,15 +23,8 @@ const Tasks = ({ tasksResult, usersResult, getTasks, getUsers }) => {
     error: usersError
   } = usersResult;
 
-  if (tasksError || usersError) {
-    return (
-      <div className="alert alert-info">
-        Что-то пошло не так. Обновите страницу, или попробуйте вернуться позже!
-      </div>
-    );
-  }
-
   const idToUserObject = getIdToUserObject(usersData);
+
   return (
     <>
       <h2>Все задачи</h2>
@@ -39,6 +32,7 @@ const Tasks = ({ tasksResult, usersResult, getTasks, getUsers }) => {
         usersData={idToUserObject}
         tasksData={tasksData}
         loading={tasksFetching || usersFetching}
+        error={tasksError || usersError}
       />
     </>
   );
