@@ -4,14 +4,16 @@ import createSagaMiddleware from 'redux-saga';
 import rootReducer from './reducers';
 import apiWatcherSaga from './middlewares/apiSaga';
 import saveUserDataToLocal from './middlewares/saveUserDataToLocal';
+import mergeTasksWithLocal from './middlewares/mergeTasksWithLocal';
 
 const initialState = {
   tasks: {
     fetching: false,
-    data: typeof window.__DATA__ !== 'undefined' &&
-    typeof window.__DATA__.tasks !== 'undefined'
-      ? window.__DATA__.tasks
-      : {},
+    data:
+      typeof window.__DATA__ !== 'undefined' &&
+      typeof window.__DATA__.tasks !== 'undefined'
+        ? window.__DATA__.tasks
+        : {},
     error: null
   },
   users: {
@@ -42,7 +44,7 @@ const store = createStore(
   rootReducer,
   initialState,
   compose(
-    applyMiddleware(sagaMiddleware, saveUserDataToLocal),
+    applyMiddleware(sagaMiddleware, saveUserDataToLocal, mergeTasksWithLocal),
     enhancer
   )
 );

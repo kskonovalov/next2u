@@ -1,7 +1,8 @@
 import {
   TASKS_API_CALL_REQUEST,
   TASKS_API_CALL_SUCCESS,
-  TASKS_API_CALL_FAILURE
+  TASKS_API_CALL_FAILURE,
+  TASKS_UPDATE
 } from '../constants';
 
 const tasksReducer = (state = {}, action) => {
@@ -17,6 +18,15 @@ const tasksReducer = (state = {}, action) => {
         fetching: false,
         error: null,
         data: action[action.apiType].data
+      };
+    case TASKS_UPDATE:
+      console.log('!');
+      console.log(action.data);
+      console.log('!');
+      return {
+        fetching: false,
+        error: null,
+        data: action.data
       };
     case TASKS_API_CALL_FAILURE:
       return {
