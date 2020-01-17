@@ -2,7 +2,8 @@ import { compose, applyMiddleware, createStore } from 'redux';
 import createSagaMiddleware from 'redux-saga';
 
 import rootReducer from './reducers';
-import apiWatcherSaga from './sagas/apiSaga';
+import apiWatcherSaga from './middlewares/apiSaga';
+import saveUserDataToLocal from './middlewares/saveUserDataToLocal';
 
 const initialState = {
   tasks: {
@@ -38,7 +39,7 @@ const store = createStore(
   rootReducer,
   initialState,
   compose(
-    applyMiddleware(sagaMiddleware),
+    applyMiddleware(sagaMiddleware, saveUserDataToLocal),
     enhancer
   )
 );
