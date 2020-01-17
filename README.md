@@ -15,7 +15,7 @@ In the project directory, you can run:
 2. Список задач пользователя: https://jsonplaceholder.typicode.com/todos?userId=1
 3. Информация о пользователе: https://jsonplaceholder.typicode.com/users?id=1
 
-Вся информация о текущем пользователе, для минимазации запросов к API, загружается в window.__DATA__
+Вся информация о текущем пользователе, для минимазации запросов к API, загружается в window.__DATA__+
 
 Что требуется реализовать на странице tasks.html:
 1. Отображение информации о пользователе +

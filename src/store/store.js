@@ -8,7 +8,10 @@ import saveUserDataToLocal from './middlewares/saveUserDataToLocal';
 const initialState = {
   tasks: {
     fetching: false,
-    data: null,
+    data: typeof window.__DATA__ !== 'undefined' &&
+    typeof window.__DATA__.tasks !== 'undefined'
+      ? window.__DATA__.tasks
+      : {},
     error: null
   },
   users: {
