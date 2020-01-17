@@ -48,7 +48,7 @@ const App = ({ user }) => {
             </li>
             <li className="nav-item">
               <button type="button" onClick={updateWinData}>
-                Test update of window._DATA_
+                Test of window._DATA_
               </button>
             </li>
           </ul>

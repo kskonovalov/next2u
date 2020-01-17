@@ -20,9 +20,6 @@ const tasksReducer = (state = {}, action) => {
         data: action[action.apiType].data
       };
     case TASKS_UPDATE:
-      console.log('!');
-      console.log(action.data);
-      console.log('!');
       return {
         fetching: false,
         error: null,
