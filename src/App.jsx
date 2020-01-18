@@ -3,22 +3,20 @@ import { connect } from 'react-redux';
 import { BrowserRouter, Route, NavLink } from 'react-router-dom';
 import loadable from '@loadable/component';
 
-import Loader from './Loader';
+import Loader from './components/Loader';
 
-const Tasks = loadable(() => import('../pages/Tasks'), {
+const Tasks = loadable(() => import('./pages/Tasks'), {
   fallback: <Loader />
 });
-const Profile = loadable(() => import('../pages/Profile'), {
+const Profile = loadable(() => import('./pages/Profile'), {
   fallback: <Loader />
 });
 
 const updateWinData = () => {
   console.log(window.__DATA__);
-  window.__DATA__ = {
-    ...window.__DATA__,
-
-  };
-  console.log();
+  // window.__DATA__ = {
+  //   ...window.__DATA__,
+  // };
 };
 
 const App = ({ user }) => {
