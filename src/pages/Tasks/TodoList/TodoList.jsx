@@ -10,9 +10,15 @@ const TodoList = ({ tasksData, usersData, error = false, loading = false }) => {
 
   if (error) {
     return (
-      <div className="alert alert-info">
-        Что-то пошло не так. Обновите страницу, или попробуйте вернуться позже!
-      </div>
+      <>
+        <div className="alert alert-info">
+          Что-то пошло не так. Обновите страницу, или попробуйте вернуться
+          позже!
+        </div>
+        <div className="alert alert-danger">
+          {error.toString()}
+        </div>
+      </>
     );
   }
 
