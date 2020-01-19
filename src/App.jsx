@@ -12,13 +12,6 @@ const Profile = loadable(() => import('./pages/Profile'), {
   fallback: <Loader />
 });
 
-const updateWinData = () => {
-  console.log(window.__DATA__);
-  // window.__DATA__ = {
-  //   ...window.__DATA__,
-  // };
-};
-
 const App = ({ user }) => {
   const { name } = user;
   return (
@@ -43,11 +36,6 @@ const App = ({ user }) => {
               >
                 Мои задачи
               </NavLink>
-            </li>
-            <li className="nav-item">
-              <button type="button" onClick={updateWinData}>
-                Test of window._DATA_
-              </button>
             </li>
           </ul>
           <span className="navbar-text">{name}</span>
