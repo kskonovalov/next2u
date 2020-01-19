@@ -12,3 +12,7 @@ const apiUrls = {
 };
 
 export { apiUrls };
+
+const timeoutms = 2000;
+
+export { timeoutms };
